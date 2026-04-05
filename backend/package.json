@@ -1,0 +1,26 @@
+{
+  "name": "git-escape-rooms",
+  "version": "1.0.0",
+  "description": "AA2-EntornosDesarrollo-EscapeRooms",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Belen-DAM/git-escape-rooms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Belen-DAM/git-escape-rooms/issues"
+  },
+  "homepage": "https://github.com/Belen-DAM/git-escape-rooms#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^6.0.1"
+  }
+}
