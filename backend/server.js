@@ -1,7 +1,16 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
+const sqlite3 = require('sqlite3');
+const knex = require('knex');
 
 const app = express();
+const db = knex({
+  client:'sqlite3',
+  connection: {
+    filename: 'rooms.db'
+  },
+  useNullAsDefault: true
+});
 
 app.use(cors());
 app.use(express.json());
