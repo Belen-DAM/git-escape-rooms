@@ -46,6 +46,40 @@ app.delete("/ciudades/:id", async (req, res) => {
   res.status(203).json({ mensaje: "ciudad borrada correctamente" });
 });
 
+app.post("/salas", async (req, res) => {
+  await db("Salas").insert({
+    nombre: req.body.nombre,
+    dificultad: req.body.dificultad,
+    categoria: req.body.categoria,
+    numero_max_jugadores: req.body.numero_max_jugadores,
+    es_tendencia: req.body.es_tendencia,
+    id_ciudades: req.body.id_ciudades,
+  });
+  res.status(201).json({ mensaje: "Sala creada correctamente" });
+});
+
+app.get("/salas", async (req, res) => {
+  const listaSalas = await db("Salas").select("*");
+  res.status(200).json(listaSalas);
+});
+
+app.put("/salas/:id", async (req, res) => {
+  await db("Salas").where({ id: req.params.id }).update({
+    nombre: req.body.nombre,
+    dificultad: req.body.dificultad,
+    categoria: req.body.categoria,
+    numero_max_jugadores: req.body.numero_max_jugadores,
+    es_tendencia: req.body.es_tendencia,
+    id_ciudades: req.body.id_ciudades,
+  });
+  res.status(202).json({ mensaje: "Sala modificada correctamente" });
+});
+
+app.delete("/salas/:id", async (req, res) => {
+  await db("Salas").where({ id: req.params.id }).del();
+  res.status(203).json({ mensaje: "Sala borrada correctamente" });
+});
+
 app.listen(8081, () => {
   console.log("servidor corriendo en el puerto 8081");
 });
