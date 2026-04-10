@@ -37,6 +37,44 @@ let borrarCiudad = (id) => {
   }
 };
 
+let crearCiudad = () => {
+  const inputCiudad = document.getElementById("input_nueva_ciudad");
+  const inputZona = document.getElementById("input_nueva_zonaCiudad");
+
+  const nombreCiudad = inputCiudad.value;
+  const nombreZona = inputZona.value;
+
+  if (nombreCiudad.trim() === "" || nombreZona.trim() === "") {
+    alert("Porfavor, rellene todos los campos antes de guardar");
+    return;
+  }
+
+  const nuevaCiudad = {
+    nombre: nombreCiudad,
+    zona: nombreZona,
+  };
+
+  fetch("http://localhost:8081/ciudades", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(nuevaCiudad),
+  })
+    .then((respuest) => {
+      if (respuest.ok) {
+        alert("Ciudad creada con éxito");
+        inputCiudad.value = "";
+        inputZona.value = "";
+
+        getCiudades();
+      } else {
+        alert("Hubo un error al guardar la ciudad");
+      }
+    })
+    .catch((error) => console.error("Error en la peticion: ", error));
+};
+
 let getSalas = () => {
   fetch("http://localhost:8081/salas")
     .then((respuesta) => respuesta.json())
