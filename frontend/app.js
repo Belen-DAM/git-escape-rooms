@@ -8,10 +8,33 @@ let getCiudades = () => {
       ciudades.forEach((ciudad) => {
         const p = document.createElement("p");
         p.textContent = ciudad.nombre;
+
+        const botonBorrar = document.createElement("button");
+        botonBorrar.textContent = "Eliminar";
+        botonBorrar.onclick = () => borrarCiudad(ciudad.id);
+
         contenedor.appendChild(p);
+        p.appendChild(botonBorrar);
       });
     })
     .catch((error) => console.error(error));
+};
+
+let borrarCiudad = (id) => {
+  if (confirm("¿Seguro que quieres borrar esta ciudad?")) {
+    fetch(`http://localhost:8081/ciudades/${id}`, {
+      method: "DELETE",
+    })
+      .then((respuesta) => {
+        if (respuesta.ok) {
+          alert("Ciudad eliminada correctamente");
+          getCiudades();
+        } else {
+          alert("Hubo un problema al intentar borrar la ciudad.");
+        }
+      })
+      .catch((error) => console.error("Error en la peticón: ", error));
+  }
 };
 
 let getSalas = () => {
