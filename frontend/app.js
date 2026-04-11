@@ -130,11 +130,179 @@ let getSalas = () => {
 
       salas.forEach((sala) => {
         const p = document.createElement("p");
-        p.textContent = sala.nombre;
+        p.textContent = `${sala.nombre} - Dificultad: ${sala.dificultad} - Categoría: ${sala.categoria} - Jugadores: ${sala.numero_max_jugadores} - Tendencia: ${sala.es_tendencia} `;
+
+        const botonBorrar = document.createElement("button");
+        botonBorrar.textContent = "Eliminar";
+        botonBorrar.onclick = () => borrarSala(sala.id);
+
+        const botonEditar = document.createElement("button");
+        botonEditar.textContent = "Editar";
+        botonEditar.onclick = () =>
+          editarSala(
+            sala.id,
+            sala.nombre,
+            sala.dificultad,
+            sala.categoria,
+            sala.numero_max_jugadores,
+            sala.es_tendencia,
+          );
+
         contenedor.appendChild(p);
+        p.appendChild(botonEditar);
+        p.appendChild(botonBorrar);
       });
     })
     .catch((error) => console.error(error));
+};
+
+let borrarSala = (id) => {
+  if (confirm("¿Seguro que quieres borrar esta sala?")) {
+    fetch(`http://localhost:8081/salas/${id}`, {
+      method: "DELETE",
+    })
+      .then((respuesta) => {
+        if (respuesta.ok) {
+          alert("Sala eliminada correctamente");
+          getSalas();
+        } else {
+          alert("Hubo un problema al intentar borrar la sala.");
+        }
+      })
+      .catch((error) => console.error("Error en la peticón: ", error));
+  }
+};
+
+let crearSala = () => {
+  const inputSala = document.getElementById("input_nueva_sala");
+  const inputDificultad = document.getElementById("input_nueva_dificultad");
+  const inputCategoria = document.getElementById("input_nueva_categoria");
+  const inputJugadores = document.getElementById("input_nuevo_jugadores");
+  const inputTendencia = document.getElementById("input_nueva_tendencia");
+
+  const nombreSala = inputSala.value;
+  const dificultad = inputDificultad.value;
+  const categoria = inputCategoria.value;
+  const jugadores = inputJugadores.value;
+  const tendencia = inputTendencia.value;
+
+  if (
+    nombreSala.trim() === "" ||
+    dificultad.trim() === "" ||
+    categoria.trim() === "" ||
+    jugadores.trim() === "" ||
+    tendencia.trim() === ""
+  ) {
+    alert("Porfavor, rellene todos los campos antes de guardar");
+    return;
+  }
+
+  const nuevaSala = {
+    nombre: nombreSala,
+    dificultad: dificultad,
+    categoria: categoria,
+    numero_max_jugadores: jugadores,
+    es_tendencia: tendencia,
+  };
+
+  fetch("http://localhost:8081/salas", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(nuevaSala),
+  })
+    .then((respuesta) => {
+      if (respuesta.ok) {
+        alert("Sala creada con éxito");
+        inputSala.value = "";
+        inputDificultad.value = "";
+        inputCategoria.value = "";
+        inputJugadores.value = "";
+        inputTendencia.value = "";
+
+        getSalas();
+      } else {
+        alert("Hubo un error al guardar la sala");
+      }
+    })
+    .catch((error) => console.error("Error en la peticion: ", error));
+};
+
+let editarSala = (
+  id,
+  nombreActual,
+  dificultadActual,
+  categoriaActual,
+  jugadoresActual,
+  tendenciaActual,
+) => {
+  let nuevoNombre = prompt(
+    "Escribe el nuevo nombre de la sala: ",
+    nombreActual,
+  );
+  if (nuevoNombre === null) return;
+
+  let dificultadNueva = prompt(
+    "Escribe la dificutlad de la sala: ",
+    dificultadActual,
+  );
+  if (dificultadNueva === null) return;
+
+  let categoriaNueva = prompt(
+    "Escribe la categoria de la sala: ",
+    categoriaActual,
+  );
+  if (categoriaNueva === null) return;
+
+  let jugadoresNuevo = prompt(
+    "Escribe los jugadores de la sala: ",
+    jugadoresActual,
+  );
+  if (jugadoresNuevo === null) return;
+
+  let tendenciaNueva = prompt(
+    "Escribe si la sala es tendencia: ",
+    tendenciaActual,
+  );
+  if (tendenciaNueva === null) return;
+
+  if (
+    nuevoNombre.trim() === "" ||
+    dificultadNueva.trim() === "" ||
+    categoriaNueva.trim() === "" ||
+    jugadoresNuevo.trim() === "" ||
+    tendenciaNueva.trim() === ""
+  ) {
+    alert("Los campos no pueden estar vacios");
+    return;
+  }
+  if (confirm("¿Seguro que quieres guardar los cambios")) {
+    const salaActualizda = {
+      nombre: nuevoNombre,
+      dificultad: dificultadNueva,
+      categoria: categoriaNueva,
+      numero_max_jugadores: jugadoresNuevo,
+      es_tendencia: tendenciaNueva,
+    };
+
+    fetch(`http://localhost:8081/salas/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(salaActualizda),
+    })
+      .then((respuesta) => {
+        if (respuesta.ok) {
+          alert("Sala modificada con éxito");
+          getSalas();
+        } else {
+          alert("Hubo un problema con la actulizacion de los datos");
+        }
+      })
+      .catch((error) => console.error("Error en la peticion: ", error));
+  }
 };
 
 getCiudades();
