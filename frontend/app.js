@@ -7,13 +7,19 @@ let getCiudades = () => {
 
       ciudades.forEach((ciudad) => {
         const p = document.createElement("p");
-        p.textContent = ciudad.nombre;
+        p.textContent = ciudad.nombre + ("( Zona: " + ciudad.zona + " ) ");
 
         const botonBorrar = document.createElement("button");
         botonBorrar.textContent = "Eliminar";
         botonBorrar.onclick = () => borrarCiudad(ciudad.id);
 
+        const botonEditar = document.createElement("button");
+        botonEditar.textContent = "Editar";
+        botonEditar.onclick = () =>
+          editarCiudad(ciudad.id, ciudad.nombre, ciudad.zona);
+
         contenedor.appendChild(p);
+        p.appendChild(botonEditar);
         p.appendChild(botonBorrar);
       });
     })
@@ -34,6 +40,46 @@ let borrarCiudad = (id) => {
         }
       })
       .catch((error) => console.error("Error en la peticón: ", error));
+  }
+};
+
+let editarCiudad = (id, nombreActual, ZonaActual) => {
+  let nuevoNombre = prompt(
+    "Escribe el nuevo nombre de la ciudad: ",
+    nombreActual,
+  );
+  if (nuevoNombre === null) return;
+
+  let zonaNueva = prompt("Escribe la zona nueva: ", ZonaActual);
+  if (zonaNueva === null) return;
+
+  if (nuevoNombre.trim() === "" || zonaNueva.trim() === "") {
+    alert("Los campos no pueden estar vacios");
+    return;
+  }
+
+  if (confirm("¿Seguro que quieres guardar los cambios")) {
+    const ciudadActualizda = {
+      nombre: nuevoNombre,
+      zona: zonaNueva,
+    };
+
+    fetch(`http://localhost:8081/ciudades/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ciudadActualizda),
+    })
+      .then((respuesta) => {
+        if (respuesta.ok) {
+          alert("Ciudad modificada con éxito");
+          getCiudades();
+        } else {
+          alert("Hubo un problema con la actulizacion de los datos");
+        }
+      })
+      .catch((error) => console.error("Error en la peticion: ", error));
   }
 };
 
