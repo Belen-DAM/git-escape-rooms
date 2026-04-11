@@ -3,6 +3,9 @@ let getCiudades = () => {
     .then((respuesta) => respuesta.json())
     .then((ciudades) => {
       const contenedor = document.getElementById("listado_ciudades");
+      if (!contenedor) {
+        return;
+      }
       contenedor.innerHTML = "";
 
       ciudades.forEach((ciudad) => {
@@ -126,6 +129,9 @@ let getSalas = () => {
     .then((respuesta) => respuesta.json())
     .then((salas) => {
       const contenedor = document.getElementById("listado_salas");
+      if (!contenedor) {
+        return;
+      }
       contenedor.innerHTML = "";
 
       salas.forEach((sala) => {
