@@ -47,31 +47,56 @@ app.delete("/ciudades/:id", async (req, res) => {
 });
 
 app.post("/salas", async (req, res) => {
+  const respuestaTendencia = String(req.body.es_tendencia).toLowerCase();
+  let valorTendencia = 0;
+
+  if (
+    respuestaTendencia === "si" ||
+    respuestaTendencia === "sí" ||
+    respuestaTendencia === "true"
+  ) {
+    valorTendencia = 1;
+  }
+
   await db("Salas").insert({
     nombre: req.body.nombre,
-    dificultad: req.body.dificultad,
+    dificultad: parseInt(req.body.dificultad),
     categoria: req.body.categoria,
-    numero_max_jugadores: req.body.numero_max_jugadores,
-    es_tendencia: req.body.es_tendencia,
-    id_ciudades: req.body.id_ciudades,
+    numero_max_jugadores: parseInt(req.body.numero_max_jugadores),
+    es_tendencia: valorTendencia,
+    id_ciudades: parseInt(req.body.id_ciudades),
   });
   res.status(201).json({ mensaje: "Sala creada correctamente" });
 });
 
 app.get("/salas", async (req, res) => {
-  const listaSalas = await db("Salas").select("*");
+  const listaSalas = await db("Salas")
+    .join("Ciudades", "Salas.id_ciudades", "=", "Ciudades.id")
+    .select("Salas.*", "Ciudades.nombre as nombre_ciudad");
   res.status(200).json(listaSalas);
 });
 
 app.put("/salas/:id", async (req, res) => {
-  await db("Salas").where({ id: req.params.id }).update({
-    nombre: req.body.nombre,
-    dificultad: req.body.dificultad,
-    categoria: req.body.categoria,
-    numero_max_jugadores: req.body.numero_max_jugadores,
-    es_tendencia: req.body.es_tendencia,
-    id_ciudades: req.body.id_ciudades,
-  });
+  const respuestaTendencia = String(req.body.es_tendencia).toLowerCase();
+  let valorTendencia = 0;
+
+  if (
+    respuestaTendencia === "si" ||
+    respuestaTendencia === "sí" ||
+    respuestaTendencia === "true"
+  ) {
+    valorTendencia = 1;
+  }
+  await db("Salas")
+    .where({ id: req.params.id })
+    .update({
+      nombre: req.body.nombre,
+      dificultad: parseInt(req.body.dificultad),
+      categoria: req.body.categoria,
+      numero_max_jugadores: parseInt(req.body.numero_max_jugadores),
+      es_tendencia: valorTendencia,
+      id_ciudades: parseInt(req.body.id_ciudades),
+    });
   res.status(202).json({ mensaje: "Sala modificada correctamente" });
 });
 
