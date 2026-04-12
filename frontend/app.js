@@ -124,6 +124,23 @@ let crearCiudad = () => {
     .catch((error) => console.error("Error en la peticion: ", error));
 };
 
+let cargarCiudadesSelect = () => {
+  fetch("http://localhost:8081/ciudades")
+    .then((respuesta) => respuesta.json())
+    .then((ciudades) => {
+      const selectCiudad = document.getElementById("input_nueva_ciudad");
+
+      ciudades.forEach((ciudad) => {
+        const opcion = document.createElement("option");
+        opcion.value = ciudad.id;
+        opcion.textContent = ciudad.nombre;
+
+        selectCiudad.appendChild(opcion);
+      });
+    })
+    .catch((error) => console.error("Error al cargar ciduades", error));
+};
+
 let getSalas = () => {
   fetch("http://localhost:8081/salas")
     .then((respuesta) => respuesta.json())
@@ -135,8 +152,12 @@ let getSalas = () => {
       contenedor.innerHTML = "";
 
       salas.forEach((sala) => {
+        let textTendencia = "No";
+        if (sala.es_tendencia === 1) {
+          textTendencia = "Sí";
+        }
         const p = document.createElement("p");
-        p.textContent = `${sala.nombre} - Dificultad: ${sala.dificultad} - Categoría: ${sala.categoria} - Jugadores: ${sala.numero_max_jugadores} - Tendencia: ${sala.es_tendencia} `;
+        p.textContent = `${sala.nombre}  [ Ciudad: ${sala.nombre_ciudad}] - Dificultad: ${sala.dificultad} - Categoría: ${sala.categoria} - Jugadores: ${sala.numero_max_jugadores} - Tendencia: ${textTendencia} `;
 
         const botonBorrar = document.createElement("button");
         botonBorrar.textContent = "Eliminar";
@@ -152,6 +173,7 @@ let getSalas = () => {
             sala.categoria,
             sala.numero_max_jugadores,
             sala.es_tendencia,
+            sala.id_ciudades,
           );
 
         contenedor.appendChild(p);
@@ -185,19 +207,22 @@ let crearSala = () => {
   const inputCategoria = document.getElementById("input_nueva_categoria");
   const inputJugadores = document.getElementById("input_nuevo_jugadores");
   const inputTendencia = document.getElementById("input_nueva_tendencia");
+  const inputCiudad = document.getElementById("input_nueva_ciudad");
 
   const nombreSala = inputSala.value;
   const dificultad = inputDificultad.value;
   const categoria = inputCategoria.value;
   const jugadores = inputJugadores.value;
   const tendencia = inputTendencia.value;
+  const ciudadId = inputCiudad.value;
 
   if (
     nombreSala.trim() === "" ||
     dificultad.trim() === "" ||
     categoria.trim() === "" ||
     jugadores.trim() === "" ||
-    tendencia.trim() === ""
+    tendencia.trim() === "" ||
+    ciudadId.trim() === ""
   ) {
     alert("Porfavor, rellene todos los campos antes de guardar");
     return;
@@ -209,9 +234,10 @@ let crearSala = () => {
     categoria: categoria,
     numero_max_jugadores: parseInt(jugadores),
     es_tendencia:
-      tendencia.toLowerCase() === "true" ||
-      tendencia.toLowerCase() === "si" ||
-      tendencia.toLowerCase() === "sí",
+      tendenciaNueva.toLowerCase() === "true" ||
+      tendenciaNueva.toLowerCase() === "si" ||
+      tendenciaNueva.toLowerCase() === "sí",
+    id_ciudades: parseInt(ciudadId),
   };
 
   fetch("http://localhost:8081/salas", {
@@ -229,6 +255,7 @@ let crearSala = () => {
         inputCategoria.value = "";
         inputJugadores.value = "";
         inputTendencia.value = "";
+        inputCiudad.value = "";
 
         getSalas();
       } else {
@@ -245,6 +272,7 @@ let editarSala = (
   categoriaActual,
   jugadoresActual,
   tendenciaActual,
+  ciudadActual,
 ) => {
   let nuevoNombre = prompt(
     "Escribe el nuevo nombre de la sala: ",
@@ -296,6 +324,7 @@ let editarSala = (
         tendenciaNueva.toLowerCase() === "true" ||
         tendenciaNueva.toLowerCase() === "si" ||
         tendenciaNueva.toLowerCase() === "sí",
+      id_ciudades: parseInt(ciudadActual),
     };
 
     fetch(`http://localhost:8081/salas/${id}`, {
@@ -319,3 +348,4 @@ let editarSala = (
 
 getCiudades();
 getSalas();
+cargarCiudadesSelect();
