@@ -207,8 +207,11 @@ let crearSala = () => {
     nombre: nombreSala,
     dificultad: dificultad,
     categoria: categoria,
-    numero_max_jugadores: jugadores,
-    es_tendencia: tendencia,
+    numero_max_jugadores: parseInt(jugadores),
+    es_tendencia:
+      tendencia.toLowerCase() === "true" ||
+      tendencia.toLowerCase() === "si" ||
+      tendencia.toLowerCase() === "sí",
   };
 
   fetch("http://localhost:8081/salas", {
@@ -288,8 +291,11 @@ let editarSala = (
       nombre: nuevoNombre,
       dificultad: dificultadNueva,
       categoria: categoriaNueva,
-      numero_max_jugadores: jugadoresNuevo,
-      es_tendencia: tendenciaNueva,
+      numero_max_jugadores: parseInt(jugadoresNuevo),
+      es_tendencia:
+        tendenciaNueva.toLowerCase() === "true" ||
+        tendenciaNueva.toLowerCase() === "si" ||
+        tendenciaNueva.toLowerCase() === "sí",
     };
 
     fetch(`http://localhost:8081/salas/${id}`, {
