@@ -205,7 +205,7 @@ let crearSala = () => {
 
   const nuevaSala = {
     nombre: nombreSala,
-    dificultad: dificultad,
+    dificultad: parseInt(dificultad),
     categoria: categoria,
     numero_max_jugadores: parseInt(jugadores),
     es_tendencia:
@@ -289,7 +289,7 @@ let editarSala = (
   if (confirm("¿Seguro que quieres guardar los cambios")) {
     const salaActualizda = {
       nombre: nuevoNombre,
-      dificultad: dificultadNueva,
+      dificultad: parseInt(dificultadNueva),
       categoria: categoriaNueva,
       numero_max_jugadores: parseInt(jugadoresNuevo),
       es_tendencia:
