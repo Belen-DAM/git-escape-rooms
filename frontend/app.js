@@ -205,10 +205,13 @@ let crearSala = () => {
 
   const nuevaSala = {
     nombre: nombreSala,
-    dificultad: dificultad,
+    dificultad: parseInt(dificultad),
     categoria: categoria,
-    numero_max_jugadores: jugadores,
-    es_tendencia: tendencia,
+    numero_max_jugadores: parseInt(jugadores),
+    es_tendencia:
+      tendencia.toLowerCase() === "true" ||
+      tendencia.toLowerCase() === "si" ||
+      tendencia.toLowerCase() === "sí",
   };
 
   fetch("http://localhost:8081/salas", {
@@ -286,10 +289,13 @@ let editarSala = (
   if (confirm("¿Seguro que quieres guardar los cambios")) {
     const salaActualizda = {
       nombre: nuevoNombre,
-      dificultad: dificultadNueva,
+      dificultad: parseInt(dificultadNueva),
       categoria: categoriaNueva,
-      numero_max_jugadores: jugadoresNuevo,
-      es_tendencia: tendenciaNueva,
+      numero_max_jugadores: parseInt(jugadoresNuevo),
+      es_tendencia:
+        tendenciaNueva.toLowerCase() === "true" ||
+        tendenciaNueva.toLowerCase() === "si" ||
+        tendenciaNueva.toLowerCase() === "sí",
     };
 
     fetch(`http://localhost:8081/salas/${id}`, {
