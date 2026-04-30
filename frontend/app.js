@@ -234,9 +234,9 @@ let crearSala = () => {
     categoria: categoria,
     numero_max_jugadores: parseInt(jugadores),
     es_tendencia:
-      tendenciaNueva.toLowerCase() === "true" ||
-      tendenciaNueva.toLowerCase() === "si" ||
-      tendenciaNueva.toLowerCase() === "sí",
+      tendencia.toLowerCase() === "true" ||
+      tendencia.toLowerCase() === "si" ||
+      tendencia.toLowerCase() === "sí",
     id_ciudades: parseInt(ciudadId),
   };
 
