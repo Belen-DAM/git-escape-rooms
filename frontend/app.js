@@ -130,6 +130,8 @@ let cargarCiudadesSelect = () => {
     .then((ciudades) => {
       const selectCiudad = document.getElementById("input_nueva_ciudad");
 
+      if (!selectCiudad || selectCiudad.tagName !== "SELECT") return;
+
       ciudades.forEach((ciudad) => {
         const opcion = document.createElement("option");
         opcion.value = ciudad.id;
@@ -222,7 +224,7 @@ let crearSala = () => {
     categoria.trim() === "" ||
     jugadores.trim() === "" ||
     tendencia.trim() === "" ||
-    ciudadId.trim() === ""
+    ciudadId === ""
   ) {
     alert("Porfavor, rellene todos los campos antes de guardar");
     return;

@@ -5,40 +5,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Escape Rooms - Ciudades</title>
 </head>
 
-<body class="container">
-    <h1>Listado de las ciudades</h1>
-    <div id="listado_ciudades">
-        <p>Cargando....</p>
-    </div>
-    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#cajaFormulario">
-        Añadir Nueva Ciudad
-    </button>
+<body class="bg-light">
 
-    <div class="collapse mb-4" id="cajaFormulario">
-        <div class="card card-body">
-            <div class="mb-3">
-                <label for="input_nueva_ciudad" class="form-label">Nombre de la ciudad</label>
-                <input type="text" class="form-control" id="input_nueva_ciudad" placeholder="Ej: Lugo, Salamanca...">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-lock-fill text-warning me-2"></i>Escape Rooms
+            </a>
+            <div class="navbar-nav flex-row gap-3">
+                <a class="nav-link active text-white" href="index.html">
+                    <i class="bi bi-building me-1"></i>Ciudades
+                </a>
+                <a class="nav-link text-secondary" href="salas.html">
+                    <i class="bi bi-door-open me-1"></i>Salas
+                </a>
             </div>
-            <div class="mb-3">
-                <label for="input_nueva_zonaCiudad" class="form-label">Nombre de la zona</label>
-                <input type="text" class="form-control" id="input_nueva_zonaCiudad" placeholder="Ej: Centro, Barrio...">
-            </div>
-            <button class="btn btn-primary" onclick="crearCiudad()">Guardar Ciudad</button>
-
         </div>
-    </div>
+    </nav>
+
+    <div class="container">
+
+        <h1 class="mb-4"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Listado de las ciudades</h1>
+        <div id="listado_ciudades" class="mb-4">
+            <p>Cargando....</p>
+        </div>
+        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#cajaFormulario">
+            <i class="bi bi-plus-circle me-1"></i>Añadir Nueva Ciudad
+        </button>
+
+        <div class="collapse mb-4" id="cajaFormulario">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white fw-semibold">
+                    Nueva Ciudad
+                </div>
+                <div class="card card-body">
+                    <div class="mb-3">
+                        <div class="col-md-6">
+                            <label for="input_nueva_ciudad" class="form-label">Nombre de la ciudad</label>
+                            <input type="text" class="form-control" id="input_nueva_ciudad"
+                                placeholder="Ej: Lugo, Salamanca...">
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="input_nueva_zonaCiudad" class="form-label">Nombre de la zona</label>
+                                <input type="text" class="form-control" id="input_nueva_zonaCiudad"
+                                    placeholder="Ej: Centro, Barrio...">
+                            </div>
+                            <button class="btn btn-primary" onclick="crearCiudad()">
+                                <i class="bi bi-floppy me-1"></i>Guardar Ciudad
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
 
-    <div>
-        <a class="btn btn-secondary" href="salas.html" role="button">Ir a Salas</a>
-    </div>
 
-    <script src="app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+            <script src="app.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

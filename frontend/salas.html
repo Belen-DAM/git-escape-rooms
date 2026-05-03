@@ -5,52 +5,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Escape Rooms - Salas</title>
 </head>
 
-<body class="container">
-    <h1>Listado de las salas</h1>
-    <div id="listado_salas">
-        <p>Cargando....</p>
-    </div>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-lock-fill text-warning me-2"></i>Escape Rooms
+            </a>
+            <div class="navbar-nav flex-row gap-3">
+                <a class="nav-link text-secondary" href="index.html">
+                    <i class="bi bi-building me-1"></i>Ciudades
+                </a>
+                <a class="nav-link active text-white" href="salas.html">
+                    <i class="bi bi-door-open me-1"></i>Salas
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#cajaFormulario">
-        Añadir Nueva Sala
-    </button>
+    <div class="container">
+        <h1 class="mb-4"><i class="bi bi-door-open-fill text-warning me-2"></i>Listado de las salas</h1>
+        <div id="listado_salas" class="mb-4">
+            <p>Cargando....</p>
+        </div>
 
-    <div class="collapse mb-4" id="cajaFormulario">
-        <div class="card card-body">
-            <div class="mb-3">
-                <label for="input_nueva_sala" class="form-label">Nombre de la sala</label>
-                <input type="text" class="form-control" id="input_nueva_sala" placeholder="Ej: Enigma de Goya, 007...">
-                <label for="input_nueva_dificultad" class="form-label">Dificultad de la sala</label>
-                <input type="text" class="form-control" id="input_nueva_dificultad" placeholder="Ej: 6/10">
-                <label for="input_nueva_categoria" class="form-label">Categoría de la sala</label>
-                <input type="text" class="form-control" id="input_nueva_categoria"
-                    placeholder="Ej: Terror, Suspense, Aventura...">
-                <label for="input_nuevo_jugadores" class="form-label">Número máximo de jugadores</label>
-                <input type="text" class="form-control" id="input_nuevo_jugadores" placeholder="Ej: 8">
-                <label for="input_nueva_tendencia" class="form-label">¿Es tendencia?</label>
-                <input type="text" class="form-control" id="input_nueva_tendencia" placeholder="Ej: Sí">
+        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#cajaFormulario">
+            <i class="bi bi-plus-circle me-1"></i>Añadir Nueva Sala
+        </button>
 
-                <div class="mb-3">
-                    <label for="input_nueva_ciudad" class="form-label">Ciudad</label>
-                    <select id="input_nueva_ciudad" class="form-select" aria-label="Desplegable para elegir ciudad">
-                        <option selected>Abre el menú para elegir una ciudad</option>
-                    </select>
+        <div class="collapse mb-4" id="cajaFormulario">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white fw-semibold">
+                    Nueva Sala
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="input_nueva_sala" class="form-label">Nombre de la sala</label>
+                            <input type="text" class="form-control" id="input_nueva_sala"
+                                placeholder="Ej: Enigma de Goya, 007...">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="input_nueva_dificultad" class="form-label">Dificultad de la sala</label>
+                            <input type="text" class="form-control" id="input_nueva_dificultad" placeholder="Ej: 6/10">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="input_nuevo_jugadores" class="form-label">Número máximo de jugadores</label>
+                            <input type="text" class="form-control" id="input_nuevo_jugadores" placeholder="Ej: 8">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="input_nueva_categoria" class="form-label">Categoría de la sala</label>
+                            <input type="text" class="form-control" id="input_nueva_categoria"
+                                placeholder="Ej: Terror, Suspense, Aventura...">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="input_nueva_tendencia" class="form-label fw-semibold">¿Es tendencia?</label>
+                            <select class="form-select" id="input_nueva_tendencia">
+                                <option value="no">No</option>
+                                <option value="si">Sí</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="input_nueva_ciudad" class="form-label">Ciudad</label>
+                            <select id="input_nueva_ciudad" class="form-select"
+                                aria-label="Desplegable para elegir ciudad">
+                                <option value="">Abre el menú para elegir una ciudad</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="crearSala()">
+                        <i class="bi bi-floppy me-1"></i>Guardar Sala
+                    </button>
                 </div>
             </div>
-
-            <button class="btn btn-primary" onclick="crearSala()">Guardar Sala</button>
-
         </div>
     </div>
 
-
-
-    <div>
-        <a class="btn btn-secondary" href="index.html" role="button">Ir a Ciudades</a>
     </div>
+
+
+
 
     <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
