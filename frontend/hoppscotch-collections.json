@@ -1,0 +1,198 @@
+[
+  {
+    "v": 11,
+    "name": "ciudades",
+    "folders": [],
+    "requests": [
+      {
+        "v": "17",
+        "name": "ciudades",
+        "method": "POST",
+        "endpoint": "http://localhost:8081/ciudades",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"nombre\": \"Bilbao\",\n  \"zona\": \"Centro\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "name": "ciudades",
+        "method": "GET",
+        "endpoint": "http://localhost:8081/ciudades",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": ""
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "name": "ciudades",
+        "method": "PUT",
+        "endpoint": "http://localhost:8081/ciudades/4",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": ""
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "name": "ciudades",
+        "method": "DELETE",
+        "endpoint": "https://echo.hoppscotch.io",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      }
+    ],
+    "auth": {
+      "authType": "none",
+      "authActive": true
+    },
+    "headers": [],
+    "variables": [],
+    "description": ""
+  },
+  {
+    "v": 11,
+    "name": "salas",
+    "folders": [],
+    "requests": [
+      {
+        "v": "17",
+        "name": "salas",
+        "method": "GET",
+        "endpoint": "http://localhost:8081/salas",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "name": "salas",
+        "method": "POST",
+        "endpoint": "http://localhost:8081/salas/4",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"nombre\": \"Bites Motel\",\n  \"dificultad\": \"8\",\n  \"categoria\": \"Suspense\"\n  \"numero_max_jugadores\": \"8\",\n  \"es_tendencia\": 1,\n  \"id_ciudades\": 5\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "name": "salas",
+        "method": "PUT",
+        "endpoint": "http://localhost:8081/salas/2",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": " {\n    \"nombre\": \"Manoir\",\n    \"dificultad\": \"7\",\n    \"categoria\": \"Terror\",\n    \"numero_max_jugadores\": \"6\",\n    \"es_tendencia\": 1,\n    \"id_ciudades\": 3\n  }"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "name": "salas",
+        "method": "DELETE",
+        "endpoint": "http://localhost:8081/salas/5",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      }
+    ],
+    "auth": {
+      "authType": "none",
+      "authActive": true
+    },
+    "headers": [],
+    "variables": [],
+    "description": ""
+  }
+]
